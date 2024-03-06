@@ -71,7 +71,6 @@ func setupKeeper(t *testing.T, expectations ...expectation) (*keeper.Keeper, sdk
 	k, err := keeper.New(codec, storeSvc, m.skeeper, m.namer.ChainName, voteWindow, voteLimit)
 	require.NoError(t, err, "new keeper")
 	k.SetVoter(m.voter)
-
 	k.SetCometAPI(m.cometAPI)
 
 	return k, ctx
