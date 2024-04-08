@@ -3,6 +3,7 @@ package cmd
 
 import (
 	"context"
+	"path/filepath"
 
 	"github.com/omni-network/omni/halo/app"
 	halocfg "github.com/omni-network/omni/halo/config"
@@ -41,7 +42,7 @@ func newRunCmd(name string, runFunc func(context.Context, app.Config) error) *co
 				return err
 			}
 
-			cometCfg, err := parseCometConfig(ctx, haloCfg.HomeDir)
+			cometCfg, err := parseCometConfig(ctx, filepath.FromSlash(haloCfg.HomeDir))
 			if err != nil {
 				return err
 			}

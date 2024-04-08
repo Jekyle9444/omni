@@ -85,7 +85,7 @@ The home directory should only contain subdirectories, no files, use --force to 
 //nolint:gocognit,nestif // This is just many sequential steps.
 func InitFiles(ctx context.Context, initCfg InitConfig) error {
 	log.Info(ctx, "Initializing halo files and directories")
-	homeDir := initCfg.HomeDir
+	homeDir := filepath.FromSlash(initCfg.HomeDir)
 
 	// Quick sanity check if --home contains files (it should only contain dirs).
 	// This prevents accidental initialization in wrong current dir.
@@ -111,7 +111,7 @@ func InitFiles(ctx context.Context, initCfg InitConfig) error {
 	// Initialize default configs.
 	comet := DefaultCometConfig(homeDir)
 	cfg := halocfg.DefaultConfig()
-	cfg.HomeDir = homeDir
+	cfg.HomeDir = filepath.FromSlash(homeDir)
 
 	// Folders
 	folders := []struct {

@@ -305,8 +305,8 @@ func writeHaloConfig(nodeDir string, logCfg log.Config, testCfg bool, mode e2e.M
 		cfg.MinRetainBlocks = 0
 	}
 
-	cfg.HomeDir = nodeDir
-	cfg.EngineJWTFile = "/halo/config/jwtsecret" // Absolute path inside docker container
+	cfg.HomeDir = filepath.FromSlash(nodeDir)
+	cfg.EngineJWTFile = filepath.FromSlash("/halo/config/jwtsecret") // Absolute path inside docker container
 
 	if testCfg {
 		cfg.SnapshotInterval = 1   // Write snapshots each block in e2e tests
