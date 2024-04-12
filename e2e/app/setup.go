@@ -418,10 +418,12 @@ func writeMonitorConfig(ctx context.Context, def Definition, logCfg log.Config, 
 	// Save private key
 	privKey, err := eoa.PrivateKey(ctx, def.Testnet.Network, eoa.TypeMonitor)
 	if err != nil {
-		return errors.Wrap(err, "get relayer key")
-	}
-	if err := ethcrypto.SaveECDSA(filepath.Join(confRoot, privKeyFile), privKey); err != nil {
-		return errors.Wrap(err, "write private key")
+		log.Warn(ctx, "Failed to get monitor key", err)
+		// return errors.Wrap(err, "get monitor key")
+	} else {
+		if err := ethcrypto.SaveECDSA(filepath.Join(confRoot, privKeyFile), privKey); err != nil {
+			return errors.Wrap(err, "write private key")
+		}
 	}
 
 	var validatorKeyGlob string

@@ -67,5 +67,5 @@ var supported = map[ID]bool{
 	Devnet:  true,
 	Staging: true,
 	Testnet: true,
-	Mainnet: false,
+	Mainnet: true,
 }

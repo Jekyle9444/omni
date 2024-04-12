@@ -20,7 +20,8 @@ import (
 func startAVSSync(ctx context.Context, cfg Config, network netconf.Network) error {
 	privateKey, err := ethcrypto.LoadECDSA(cfg.PrivateKey)
 	if err != nil {
-		return errors.Wrap(err, "failed to load private key")
+		log.Warn(ctx, "Failed to load private key - skipping avs sync", err)
+		return nil
 	}
 
 	ethL1, ok := network.EthereumChain()
